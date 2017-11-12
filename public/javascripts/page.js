@@ -115,6 +115,7 @@ function sendNotification()
 	function sendNotificationCallSuccess(res, status){
 		listAllUsers();
 		if(res.status == 0){
+			alert('Notification sent successfully!');
 			console.log(res.pushbulletResponse);
 		}
 		else{
