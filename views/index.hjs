@@ -1,0 +1,83 @@
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>{{ title }}</title>
+
+    <link href="BS/css/bootstrap.css" rel="stylesheet">
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">{{ title }}</a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
+
+	<div>
+		<h1>Task 1</h1>
+		<span>Register your Access Token</span>
+		<div class="form-group">
+			<label for="Username">Username</label>
+			<input id="Username" type="text" class="form-control" />
+			<label for="AccessToken">Access Token</label>
+			<input id="AccessToken" type="text" class="form-control" value="o.PmBVlrQztLmcWOR28ZKrpAVcFTjc7kC1" />
+			<button class="btn btn-primary pull-right" onclick="registerUser()">Register</button>
+		</div>
+	</div>
+
+	<div>
+		<h1>Task 2</h1>
+		<span>Retrieve a list of all registered users</span>
+		<button onclick="listAllUsers()" class="btn btn-primary pull-right">Get List <span class="glyphicon glyphicon-refresh"></span></button>
+		<div>
+			<table id="allRegisteredUsersTable" class="table">
+				<thead>
+					<tr>
+						<th>Username</th>
+						<th>Access Token</th>
+						<th>Creation Time</th>
+						<th>Notifications pushed</th>
+					</tr>
+				</thead>
+				<tbody>
+
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+	<div>
+		<h1>Task 3</h1>
+		<span>Send a notification!</span>
+		<div class="form-group">
+			<label for="sendNotificationTo">Send To</label>
+			<select id="sendNotificationTo" class="form-control"></select>
+			<label for="notificationTitle">Notification Title</label>
+			<input id="notificationTitle" type="text" class="form-control" value="title"/>
+			<label for="notificationMessage">Notification Message</label>
+			<input id="notificationMessage" type="text" class="form-control" value="my new message" />
+			<button class="btn btn-primary pull-right" onclick="sendNotification()">Send!</button>
+		</div>
+	</div>
+
+    </div><!-- /.container -->
+    <script src="javascripts/page.js"></script>
+    <script src="JQ/jquery.js"></script>
+    <script src="BS/js/bootstrap.js"></script>
+    <script src="Moment/moment.js"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+  
+</body>
+</html>
