@@ -89,12 +89,18 @@ function listAllUsers()
 	}
 
 	function populateUsersSelectMenu(res){
+		var currVal = $('#sendNotificationTo').val();
+
 		var selectHTML = "";
 		$(res).each(function(i, user){
 			selectHTML += '<option value="' + user.username + '"> ' + user.username + '</option>\n'
 		});
 		$('#sendNotificationTo').html(selectHTML);
 
+		if(currVal != "" && currVal != null)
+		{
+			$('#sendNotificationTo').val(currVal);
+		}
 	}
 }
 
@@ -116,9 +122,14 @@ function sendNotification()
 
 	function sendNotificationCallSuccess(res, status){
 		listAllUsers();
+		console.log(res);
 		if(res.status == 0){
-			alert('Notification sent successfully!');
-			console.log(res.pushbulletResponse);
+			if(res.pushbulletResponse && res.pushbulletResponse.error){
+				alert(res.pushbulletResponse.error_code);
+			}
+			else{
+				alert('Notification sent successfully!');	
+			}
 		}
 		else{
 			sendNotificationErrorHandle(res);
