@@ -2,37 +2,37 @@ function registerUser(){
 	var Username = $('#Username').val();
 	var AccessToken = $('#AccessToken').val();
 
-	if(Username == "" || AccessToken == "")
-	{
-		//error
-	}
-	else{
-		//All ok
-		$.ajax({
-			url:'/users/register',
-			type:'POST',
-			data:{
-				username:Username,
-				accessToken: AccessToken
-			}
-		})
-		.done(registerCallSuccess)
-		.fail(ajaxFailure);
-	}
+	//All ok
+	$.ajax({
+		url:'/users/register',
+		type:'POST',
+		data:{
+			username:Username,
+			accessToken: AccessToken
+		}
+	})
+	.done(registerCallSuccess)
+	.fail(ajaxFailure);
+	
 
 	function registerCallSuccess(res, status){
 		console.log(status, res);
 
-		if(res.state == 0){
-			alert('user registered!');
-			listAllUsers();
+		alert('user registered!');
+		listAllUsers();
+	}
+
+	function ajaxFailure(reqObj, status){
+		console.log(status, reqObj);
+		if(reqObj.status == 403){
+			alert('Error! Either the Username or Access Token is blank, or the Username already exists!');
 		}
 		else{
-			registerErrorHandle(res);
+			alert('An unknown error occured!');
 		}
 	}
 
-	function registerErrorHandle(res){
+	/*function registerErrorHandle(res){
 		alert('user already exists!');
 		switch(res.state){
 			case 1:
@@ -47,7 +47,7 @@ function registerUser(){
 				alert('An unknown error has occured');
 			break;
 		}
-	}
+	}*/
 }
 
 function listAllUsers()
@@ -113,6 +113,7 @@ function sendNotification()
 	.fail(ajaxFailure);
 
 	function sendNotificationCallSuccess(res, status){
+		listAllUsers();
 		if(res.status == 0){
 			console.log(res.pushbulletResponse);
 		}
@@ -130,6 +131,10 @@ function sendNotification()
 			alert('An unknown error has occured');
 			break;
 		}
+	}
+
+	function ajaxFailure(reqObj, status){
+		sendNotificationErrorHandle(reqObj.responseJSON);
 	}
 }
 

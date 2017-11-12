@@ -8,8 +8,7 @@ router.post('/register', function(req, res, next) {
 	var uname = req.body['username'];
 	var AT = req.body['accessToken'];
 
-	var responseObj = {}
-	responseObj.state = 0;
+	var responseObj = null;
 
 	if(uname && AT){
 		//Get Current users
@@ -19,25 +18,29 @@ router.post('/register', function(req, res, next) {
 		var existingUser = allUsers.filter(x => x.username == uname)[0];
 		if(existingUser){
 			 //error - username already exists
-			 responseObj.state = 1;
+			 //responseObj.state = 1;
 		}
 		else
 		{//user does not exist, so create and add to array
 
-			existingUser = {
+			responseObj = {
 				username:uname, 
 				accessToken:AT,
 				creationTime:new Date(),
 				numOfNotificationsPushed:0
 			}
 
-			responseObj.newUser = existingUser;
-
-			allUsers.push(existingUser);
+			allUsers.push(responseObj);
 		}
 	}
 
-	res.send(responseObj);
+	if(responseObj != null){
+		res.send(responseObj);
+	}
+	else
+	{
+		res.sendStatus(403);
+	}
 });
 
 
@@ -81,7 +84,7 @@ router.post('/push', function(req, res, next) {
 	    });
 
 		var options = {
-		    host: 'api.pushbullet.com',
+		    host: 'api.pushbullet.com.noooooooooooo',
 		    port: 443,
 		    path: '/v2/pushes',
 		    method: 'POST',
@@ -107,16 +110,21 @@ router.post('/push', function(req, res, next) {
 	            var obj = JSON.parse(result);
 	            //console.log(pushbulletRes.statusCode)//, obj);
 	            responseObj.pushbulletResponse = obj;
+	            existingUser.numOfNotificationsPushed++;
 	            res.send(responseObj);
 	        });
 		});
+
+		pushbulletRequest.on('error', function(e){
+			res.send(e);
+		})
 
 		pushbulletRequest.write(data);
 		pushbulletRequest.end();
 	}
 	else{
 		responseObj.status = 1;
-		res.send(responseObj);
+		res.status(403).send(responseObj);
 	}
 });
 
