@@ -84,7 +84,7 @@ router.post('/push', function(req, res, next) {
 	    });
 
 		var options = {
-		    host: 'api.pushbullet.com.noooooooooooo',
+		    host: 'api.pushbullet.com',
 		    port: 443,
 		    path: '/v2/pushes',
 		    method: 'POST',
