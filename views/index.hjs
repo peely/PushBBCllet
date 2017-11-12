@@ -32,7 +32,7 @@
 			<label for="Username">Username</label>
 			<input id="Username" type="text" class="form-control" />
 			<label for="AccessToken">Access Token</label>
-			<input id="AccessToken" type="text" class="form-control" value="o.PmBVlrQztLmcWOR28ZKrpAVcFTjc7kC1" />
+			<input id="AccessToken" type="text" class="form-control" value="" />
 			<button class="btn btn-primary pull-right" onclick="registerUser()">Register</button>
 		</div>
 	</div>
@@ -65,9 +65,9 @@
 			<label for="sendNotificationTo">Send To</label>
 			<select id="sendNotificationTo" class="form-control"></select>
 			<label for="notificationTitle">Notification Title</label>
-			<input id="notificationTitle" type="text" class="form-control" value="title"/>
+			<input id="notificationTitle" type="text" class="form-control" value=""/>
 			<label for="notificationMessage">Notification Message</label>
-			<input id="notificationMessage" type="text" class="form-control" value="my new message" />
+			<input id="notificationMessage" type="text" class="form-control" value="" />
 			<button class="btn btn-primary pull-right" onclick="sendNotification()">Send!</button>
 		</div>
 	</div>
