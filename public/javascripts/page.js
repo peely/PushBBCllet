@@ -1,3 +1,5 @@
+listAllUsers();
+
 function registerUser(){
 	var Username = $('#Username').val();
 	var AccessToken = $('#AccessToken').val();
