@@ -110,7 +110,11 @@ router.post('/push', function(req, res, next) {
 	            var obj = JSON.parse(result);
 	            //console.log(pushbulletRes.statusCode)//, obj);
 	            responseObj.pushbulletResponse = obj;
-	            existingUser.numOfNotificationsPushed++;
+
+	            if(obj.error == null)
+	            {
+	            	existingUser.numOfNotificationsPushed++;	
+	            }
 	            res.send(responseObj);
 	        });
 		});

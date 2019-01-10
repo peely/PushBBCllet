@@ -12,7 +12,7 @@ On your target machine, open your command window of choice, cd your way to your 
 While not required, if you plan to make any changes to the code at all, I suggest installing the npm module [nodemon](https://www.npmjs.com/package/nodemon), `npm install -g nodemon`, and then run it with `nodemon --ignore public bin/www`. This will restart the server each time you make a change to a file not in the public directory.
 
 
-Now its running you should be able to browse to [http://localhost:3000](http://localhost:3000) and see the index page
+Now its running you should be able to browse to [http://localhost:3000](http://localhost:3000) and see the index page.
 
 ## The Index Page
 This page gives you a GUI for the API. You can give it a Username and an Access Token, list all the registered users, and then send a notification to one of those registered users.
@@ -31,7 +31,7 @@ To register, make a `POST` request to `/users/register`, with the form parameter
 Make a `GET` request to `/users/list`, a JSON object of the array of user objects is returned.
 
 ### Push
-You push a notification to a registered account by making a `POST` request to `/users/push`. Include the parameters `title`, `message` and `username`, where the `username` is the username registered with the app of the user you wish to the notification to be sent to. If the call is successful, the response will have the HTTP status 200, and the returned object will have a status property with the value 0, and also include the returned pushbullet object in the `pushbulletResponse` property. Like so
+You push a notification to a registered account by making a `POST` request to `/users/push`. Include the parameters `title`, `message` and `username`, where the `username` is the username registered with the app of the user you wish the notification to be sent to. If the call is successful, the response will have the HTTP status 200, and the returned object will have a status property with the value 0, and also include the returned pushbullet object in the `pushbulletResponse` property. Like so
 
 ```
 {
@@ -59,4 +59,4 @@ You push a notification to a registered account by making a `POST` request to `/
 
 ```
 
-If the call was unsuccessful, e.g. the sent username does not exist in the array of registered users, then the return object has a `status` value of `1`, and the HTTP response code of 403.
+If the call was unsuccessful, e.g. the sent username does not exist in the array of registered users, then the return object has a `status` value of `1`, and the HTTP response code of 403. If the an error occured on pushbullets side, you will still get a status 200 reponse, but the pushbulletResponse object will be the error returned by pushbullet.
